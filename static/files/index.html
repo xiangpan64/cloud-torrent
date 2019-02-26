@@ -55,7 +55,38 @@
 		<section class="torrents" ng-controller="TorrentsController" ng-include src="'template/torrents.html'"></section>
 		<section class="downloads" ng-controller="DownloadsController" ng-include src="'template/downloads.html'"></section>
 
+		<footer>
+			<div>
+				<span>github.com/
+					<a href="https://github.com/jpillora" target="_blank">xiangpan64</a>/
+					<a href="https://github.com/jpillora/cloud-torrent" target="_blank">cloud-torrent</a> version {{ state.Stats.Version }} - </span>
+				<span ng-if="numKeys(state.Users) > 1">{{ numKeys(state.Users) }} users connected - </span>
+				<span>
+					<a href="https://golang.org" target="_blank">Go</a> {{ state.Stats.Runtime }}
+				</span>
+			</div>
+			<div>
+				<span ng-if="state.Stats.System.set">
+					<span class="extra">
+						goroutines {{ state.Stats.System.goRoutines }},
+					</span>
+					<span class="extra">
+						gomem {{ state.Stats.System.goMemory | bytes }},
+					</span>
+					<span>
+						cpu {{ state.Stats.System.cpu | round }}%,
+					</span>
+					<span>
+						mem {{ (100*state.Stats.System.memoryUsed/state.Stats.System.memoryTotal) | round }}%,
+					</span>
+					<span>
+						disk {{ (100*state.Stats.System.diskUsed/state.Stats.System.diskTotal) | round }}%,
+					</span>
+				</span>
+				<span ng-if="state.Stats.Uptime">up {{ ago(state.Stats.Uptime) }}</span>
+			</div>
 
+		</footer>
 
 		<script src="js/vendor/query-string.js"></script>
 		<script src="js/vendor/angular.min.js"></script>
